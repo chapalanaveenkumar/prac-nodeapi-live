@@ -2,6 +2,7 @@ const express=require("express");
 const morgan=require("morgan");
 const dotenv=require("dotenv");
 const { connectdb } = require("./databaseconnection");
+const userRouter=require("./routers/userRouter");
 
 connectdb();
 dotenv.config();
@@ -9,6 +10,7 @@ const app=express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(morgan('combined')) // combined refers to the format of the tracing .dev includes colors and all ,this combined is for detailed information like user ,receiver.
+app.use('/',userRouter);
 
 
 app.listen(process.env.port,()=>{
